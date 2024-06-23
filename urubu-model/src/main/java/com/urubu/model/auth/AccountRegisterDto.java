@@ -1,6 +1,7 @@
 package com.urubu.model.auth;
 
 
+import com.urubu.model.base.SelectableDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -12,11 +13,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @Data
-public class UserRegisterDto {
+public class AccountRegisterDto {
 
-    private Long id;
     private String name;
     private String email;
     private String password;
+    private String nationalRegistry;
+    private SelectableDto bank;
 
 }

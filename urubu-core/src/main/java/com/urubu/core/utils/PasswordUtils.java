@@ -6,7 +6,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.urubu.core.constants.CoreReturnMessage;
+import com.urubu.core.config.ErrorMessage;
+import com.urubu.core.constants.CoreReturnMessages;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,20 +19,18 @@ public class PasswordUtils {
     private static final short MIN_LENGTH = 6;
     private static final short MAX_LENGTH = 20;
     public static final String PASSWORD_PATTERN = String.format("(^(?=.*[a-zA-Z])(?=.*\\d)[\\S]{%d,%d}$)", MIN_LENGTH, MAX_LENGTH);
-    public static final String PASSWORD_MESSAGE_MEDIUM = String.format(CoreReturnMessage.WEAK_PASSWORD, MIN_LENGTH, MAX_LENGTH);
+    public static final String PASSWORD_MESSAGE_MEDIUM = String.format(ErrorMessage.getMessage(CoreReturnMessages.WEAK_PASSWORD), MIN_LENGTH, MAX_LENGTH);
+
 
 	public static String encodeMd5(String s) {
-		if (s != null) {
+		if (StringUtils.isNotBlank(s)) {
 			try {
-				String senha = "";
-
 				MessageDigest md = MessageDigest.getInstance("MD5");
 
 				BigInteger hash = new BigInteger(1, md.digest(s.getBytes()));
-				senha = hash.toString(16);
-				return senha;
+                return hash.toString(16);
 			} catch (NoSuchAlgorithmException e) {
-				log.error("Error in Password Encoder", e);
+				log.error("Cannot encode password to MD5", e);
 			}
 		}
 		return null;

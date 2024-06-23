@@ -3,9 +3,9 @@ package com.urubu.web.endpoint.handler;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerResponseContext;
 import jakarta.ws.rs.container.ContainerResponseFilter;
-import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 
 
 public class ExceptionLoggingResponseFilter implements ContainerResponseFilter {
@@ -15,9 +15,9 @@ public class ExceptionLoggingResponseFilter implements ContainerResponseFilter {
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) {
 
-        if (responseContext.getStatus() != HttpStatus.SC_OK
-                && responseContext.getStatus() != HttpStatus.SC_CREATED
-                && responseContext.getStatus() != HttpStatus.SC_NO_CONTENT){
+        if (responseContext.getStatus() != HttpStatus.OK.value()
+                && responseContext.getStatus() != HttpStatus.CREATED.value()
+                && responseContext.getStatus() != HttpStatus.NO_CONTENT.value()){
             log.info("USER EXCEPTION MESSAGE: {}", responseContext.getEntity());
         }
     }

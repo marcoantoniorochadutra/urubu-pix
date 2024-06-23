@@ -1,9 +1,9 @@
 package com.urubu.service;
 
-import com.urubu.domain.ref.AvailableBank;
 import com.urubu.model.AccountDto;
 import com.urubu.model.TransactionDto;
 import com.urubu.model.UserDto;
+import com.urubu.model.auth.AccountRegisterDto;
 
 public interface AccountService {
 
@@ -11,7 +11,7 @@ public interface AccountService {
 
     TransactionDto updateProfit(UserDto user);
 
-    AccountDto openAccount(UserDto userDto, AvailableBank bank);
+    AccountDto openAccount(AccountRegisterDto register);
 
 
 

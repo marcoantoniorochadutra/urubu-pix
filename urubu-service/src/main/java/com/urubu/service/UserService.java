@@ -1,11 +1,11 @@
 package com.urubu.service;
 
+import com.urubu.domain.entity.User;
 import com.urubu.model.UserDto;
-import com.urubu.model.auth.UserRegisterDto;
 
 public interface UserService {
 
-    UserDto registerUser(UserRegisterDto userDto);
+    User registerUser(String nome, String email, String password);
 
     UserDto login(UserDto userDto);
 }
