@@ -1,4 +1,5 @@
 spring:
+  flyway.enabled: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${DATASOURCE_URL}

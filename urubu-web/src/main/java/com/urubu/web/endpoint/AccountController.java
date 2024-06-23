@@ -1,13 +1,10 @@
 package com.urubu.web.endpoint;
 
 import com.urubu.model.AccountDto;
+import com.urubu.model.auth.AccountRegisterDto;
 import com.urubu.service.AccountService;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.POST;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.urubu.model.UserDto;
-import com.urubu.service.UserService;
 
 import jakarta.ws.rs.Path;
 
@@ -21,10 +18,10 @@ public class AccountController {
         this.accountService = accountService;
     }
 
+    @POST
     @Path("/open-account/{bank}")
-    public AccountDto register(@Context UserDto userDto,
-                               @PathParam("bank") String bank) {
-        return accountService.openAccount(userDto, null);
+    public AccountDto register(AccountRegisterDto register) {
+        return accountService.openAccount(register);
     }
 
 }

@@ -19,7 +19,7 @@ public abstract class AbstractTestDbSetup {
     static MySQLContainer<?> mySqlContainer = new MySQLContainer<>("mysql:8.0");
 
     @BeforeAll
-    static void startDb() throws SQLException {
+    static void startDb() {
         mySqlContainer.start();
         System.setProperty("DATASOURCE_URL", mySqlContainer.getJdbcUrl());
         System.setProperty("DATASOURCE_PASSWORD", mySqlContainer.getPassword());

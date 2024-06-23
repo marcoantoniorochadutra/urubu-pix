@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public class ListConverter {
 
@@ -12,17 +13,12 @@ public class ListConverter {
 
         final ArrayList<U> dest = new ArrayList<U>();
 
-        for (T element : source) {
-            if (element == null) {
-                continue;
+        source.forEach(element -> {
+            if(Objects.nonNull(element)) {
+                dest.add(mapper.map(element, destType));
             }
-            dest.add(mapper.map(element, destType));
-        }
-
-        List s1 = new ArrayList();
-        s1.add(null);
-        dest.removeAll(s1);
-
+        });
+   
         return dest;
     }
 }
