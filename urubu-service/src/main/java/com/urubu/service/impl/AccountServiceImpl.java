@@ -1,29 +1,36 @@
 package com.urubu.service.impl;
 
-import com.urubu.core.constants.CoreReturnMessage;
 import com.urubu.core.exceptions.AccountException;
 import com.urubu.domain.entity.Account;
 import com.urubu.domain.entity.User;
 import com.urubu.domain.ref.AvailableBank;
 import com.urubu.domain.repository.AccountRepository;
-import com.urubu.domain.repository.UserRepository;
 import com.urubu.model.AccountDto;
 import com.urubu.model.TransactionDto;
 import com.urubu.model.UserDto;
+import com.urubu.model.auth.AccountRegisterDto;
 import com.urubu.service.AccountService;
+import com.urubu.service.UserService;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AccountServiceImpl implements AccountService {
 
     private final AccountRepository accountRepository;
-    private final UserRepository userRepository;
+    private final UserService userService;
+    private final ModelMapper modelMapper;
+
 
     @Autowired
     public AccountServiceImpl(AccountRepository accountRepository,
-                              UserRepository userRepository) {
+                              UserService userService,
+                              ModelMapper modelMapper) {
         this.accountRepository = accountRepository;
-        this.userRepository = userRepository;
+        this.userService = userService;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -37,21 +44,30 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountDto openAccount(UserDto userDto, AvailableBank bank) {
+    public AccountDto openAccount(AccountRegisterDto register) {
 
-        User user = userRepository.getReferenceById(userDto.getId());
-
-        if(accountRepository.existsByUserIdAndBank(userDto.getId(), null)) {
-            throw new AccountException(CoreReturnMessage.EXISTING_ACCOUNT);
-        }
+        validateRegister(register);
+        User user = userService.registerUser(register.getName(), register.getEmail(), register.getPassword());
 
         Account newAccount = new Account();
         newAccount.setAccountIdentifier(generateAccountIdentifier());
         newAccount.setBalance(0.0);
-        newAccount.setBank(null);
+        newAccount.setBank(AvailableBank.BANK_1);
         newAccount.setUser(user);
 
-        return null;
+        Account openAccount = accountRepository.saveAndFlush(newAccount);
+
+        return modelMapper.map(openAccount, AccountDto.class);
+    }
+
+    private void validateRegister(AccountRegisterDto register) {
+		if (!isNationalRegistrValid(register.getNationalRegistry())) {
+            throw new AccountException(".");
+		}
+    }
+
+    private boolean isNationalRegistrValid(String nationalRegistry) {
+        return true;
     }
 
     private String generateAccountIdentifier() {

@@ -13,6 +13,6 @@ public class LogRequestFilter implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext requestContext) {
-        log.info("Requisição Recebida | URL: {} | HEADERS: {} | QUERY: {}", requestContext.getUriInfo().getPath(), requestContext.getHeaders(), requestContext.getUriInfo().getQueryParameters());
+         log.info("Requisição Recebida | URL: {} | HEADERS: {} | QUERY: {}", requestContext.getUriInfo().getPath(), requestContext.getHeaders(), requestContext.getUriInfo().getQueryParameters());
     }
 }

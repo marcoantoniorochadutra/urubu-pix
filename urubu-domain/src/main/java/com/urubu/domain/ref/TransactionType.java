@@ -3,7 +3,7 @@ package com.urubu.domain.ref;
 public enum TransactionType {
 
     WITHDRAW(0, "Withdraw"),
-    PROFIT(1, "Profit"),
+    INVEST(1, "Invest"),
     DEPOSIT(2, "Deposit");
 
     private final Integer ordinal;
