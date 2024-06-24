@@ -3,11 +3,6 @@ server:
   servlet.context-path: /
 spring:
   flyway.enabled: false
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306?serverTimezone=UTC
-    username: keek_sys_api
-    password: ijHgbFFt%$d657
   jersey:
     application-path: cc/api
 
