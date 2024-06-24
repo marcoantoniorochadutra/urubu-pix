@@ -3,11 +3,6 @@ server:
   servlet.context-path: /
 spring:
   flyway.enabled: false
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306?serverTimezone=UTC
-    username: keek_sys_api
-    password: ijHgbFFt%$d657
   jersey:
     application-path: cc/api
 
@@ -15,6 +10,6 @@ springdoc:
   api-docs:
     path: /api-docs
 
-spring.jpa.properties.javax.persistence.schema-generation.scripts.action: create
-spring.jpa.properties.javax.persistence.schema-generation.scripts.create-target: schema.sql
-spring.jpa.properties.hibernate.format_sql: true
+#spring.jpa.properties.javax.persistence.schema-generation.scripts.action: create
+#spring.jpa.properties.javax.persistence.schema-generation.scripts.create-target: schema.sql
+#spring.jpa.properties.hibernate.format_sql: true
