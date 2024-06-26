@@ -1,6 +1,5 @@
 package com.urubu.model.auth;
 
-
 import com.urubu.model.base.SelectableDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,10 +14,8 @@ import lombok.Setter;
 @Data
 public class AccountRegisterDto {
 
-    private String name;
-    private String email;
-    private String password;
-    private String nationalRegistry;
-    private SelectableDto bank;
-
+	private String name;
+	private String email;
+	private String password;
+	private String nationalRegistry;
 }

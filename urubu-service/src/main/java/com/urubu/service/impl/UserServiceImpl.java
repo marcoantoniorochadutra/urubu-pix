@@ -9,6 +9,7 @@ import com.urubu.domain.entity.User;
 import com.urubu.domain.repository.UserRepository;
 import com.urubu.model.UserDto;
 import com.urubu.service.UserService;
+import io.micrometer.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +41,13 @@ public class UserServiceImpl implements UserService {
 		}
 
 		if(!ValidationUtils.isValidEmail(email)) {
-			throw new BusinessException(ErrorMessage.getMessage(CoreReturnMessages.INVALID_ARGUMENTO) + "[email]");
+			String errorMsg = ErrorMessage.getMessageWithField(CoreReturnMessages.INVALID_ARGUMENT);
+			throw new BusinessException(String.format(errorMsg, "[email]"));
+		}
+
+		if(StringUtils.isBlank(nome)) {
+			String errorMsg = ErrorMessage.getMessageWithField(CoreReturnMessages.NOT_NULL_MESSAGE);
+			throw new BusinessException(String.format(errorMsg, "[nome]"));
 		}
 	}
 

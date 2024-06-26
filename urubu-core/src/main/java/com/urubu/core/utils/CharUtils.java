@@ -24,6 +24,6 @@ public class CharUtils {
     }
     
 	public static Boolean isOnlyRepetitiveChars(String value) {
-        return value.chars().allMatch(predicate -> Objects.equals(predicate, value.charAt(0)));
+        return value.chars().allMatch(c -> c == value.charAt(0));
 	}
 }

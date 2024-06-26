@@ -1,2 +1,4 @@
-package com.urubu.model;public class CreditCardDto {
+package com.urubu.model;
+
+public class CreditCardDto {
 }

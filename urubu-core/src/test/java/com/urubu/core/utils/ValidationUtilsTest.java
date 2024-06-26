@@ -10,7 +10,7 @@ public class ValidationUtilsTest {
     @Test
     public void shouldBeValidCPF() {
 
-        String cpf = "12605716961";
+        String cpf = "39999807020";
 
         Boolean valid = ValidationUtils.isNationalRegistryValid(cpf);
 
@@ -40,7 +40,7 @@ public class ValidationUtilsTest {
     @Test
     public void shouldBeInvalidCPFRepetitive() {
 
-        String cpf = "11111111111";
+        String cpf = "111.111.111-11";
 
         Boolean valid = ValidationUtils.isNationalRegistryValid(cpf);
 

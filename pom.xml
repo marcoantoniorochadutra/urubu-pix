@@ -25,6 +25,7 @@
         <swagger-jaxrs2.version>2.2.20</swagger-jaxrs2.version>
         <model-mapper.version>3.0.0</model-mapper.version>
         <apache-commons.version>3.14.0</apache-commons.version>
+        <io.jsonwebtoken-version>0.12.5</io.jsonwebtoken-version>
         <test-container-mongodb.version>1.19.0</test-container-mongodb.version>
     </properties>
 

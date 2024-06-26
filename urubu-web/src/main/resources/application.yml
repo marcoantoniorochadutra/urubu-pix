@@ -1,15 +1,22 @@
+spring.profiles.active: ${SPRING_BOOT_PROFILE:local}
 server:
   port: 8070
   servlet.context-path: /
 spring:
+  main:
+    banner-mode: off
+  datasource:
+    hikari:
+      poolName: urubu_pix
+      autoCommit: false
+      connectionTimeout: 120000
+      validationTimeout: 60000
+      maxLifetime: 1500000
+      leakDetectionThreshold: 120000
+      maximumPoolSize: ${DB_POOLSIZE:40}
   flyway.enabled: false
   jersey:
-    application-path: cc/api
-
+    application-path: up/api
 springdoc:
   api-docs:
     path: /api-docs
-
-spring.jpa.properties.javax.persistence.schema-generation.scripts.action: create
-spring.jpa.properties.javax.persistence.schema-generation.scripts.create-target: schema.sql
-spring.jpa.properties.hibernate.format_sql: true

@@ -60,7 +60,7 @@ public class ConstraintViolationExceptionHandler implements ExceptionMapper<Cons
 		}
 		
 		if (!patternFields.isEmpty()){
-			sb.append(String.format(" %s  %s.", ErrorMessage.getMessage(CoreReturnMessages.INVALID_ARGUMENTO), nullFields));
+			sb.append(String.format(" %s  %s.", ErrorMessage.getMessage(CoreReturnMessages.INVALID_ARGUMENT), nullFields));
 		}
 		
 		if (!sizeFields.isEmpty()){
@@ -68,7 +68,7 @@ public class ConstraintViolationExceptionHandler implements ExceptionMapper<Cons
 		}
 		
 		if (!numberFields.isEmpty()){
-			sb.append(String.format(" %s  %s.", ErrorMessage.getMessage(CoreReturnMessages.INVALID_ARGUMENTO), numberFields));
+			sb.append(String.format(" %s  %s.", ErrorMessage.getMessage(CoreReturnMessages.INVALID_ARGUMENT), numberFields));
 		}
 		
 		return sb.toString();

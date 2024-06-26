@@ -1,5 +1,6 @@
 package com.urubu.domain.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Data
-@Entity
+@Entity(name = "users")
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = "email", name = "uk_user_email"),
 })
@@ -29,12 +30,15 @@ public class User {
     private Long id;
 
     @NotNull
+    @Column(length = 120)
     private String nome;
 
     @NotNull
+    @Column(length = 120)
     private String email;
 
     @NotNull
+    @Column(length = 120)
     private String hashSenha;
 
 }

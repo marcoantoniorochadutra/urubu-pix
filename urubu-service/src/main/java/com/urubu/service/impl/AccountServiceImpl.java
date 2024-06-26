@@ -1,9 +1,16 @@
 package com.urubu.service.impl;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.urubu.core.config.ErrorMessage;
+import com.urubu.core.constants.CoreReturnMessages;
 import com.urubu.core.exceptions.AccountException;
+import com.urubu.core.utils.ValidationUtils;
 import com.urubu.domain.entity.Account;
 import com.urubu.domain.entity.User;
-import com.urubu.domain.ref.AvailableBank;
 import com.urubu.domain.repository.AccountRepository;
 import com.urubu.model.AccountDto;
 import com.urubu.model.TransactionDto;
@@ -11,10 +18,6 @@ import com.urubu.model.UserDto;
 import com.urubu.model.auth.AccountRegisterDto;
 import com.urubu.service.AccountService;
 import com.urubu.service.UserService;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -52,7 +55,6 @@ public class AccountServiceImpl implements AccountService {
         Account newAccount = new Account();
         newAccount.setAccountIdentifier(generateAccountIdentifier());
         newAccount.setBalance(0.0);
-        newAccount.setBank(AvailableBank.BANK_1);
         newAccount.setUser(user);
 
         Account openAccount = accountRepository.saveAndFlush(newAccount);
@@ -61,16 +63,12 @@ public class AccountServiceImpl implements AccountService {
     }
 
     private void validateRegister(AccountRegisterDto register) {
-		if (!isNationalRegistrValid(register.getNationalRegistry())) {
-            throw new AccountException(".");
+		if (!ValidationUtils.isNationalRegistryValid(register.getNationalRegistry())) {
+            throw new AccountException(ErrorMessage.getMessage(CoreReturnMessages.INVALID_ARGUMENT) + " [nationalRegistry]");
 		}
     }
 
-    private boolean isNationalRegistrValid(String nationalRegistry) {
-        return true;
-    }
-
     private String generateAccountIdentifier() {
-        return "account_" + RandomStringUtils.random(10, true, true);
+        return "account_" + RandomStringUtils.random(20, true, true);
     }
 }

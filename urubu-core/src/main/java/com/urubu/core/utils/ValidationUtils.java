@@ -17,6 +17,7 @@ public class ValidationUtils {
 	public static Boolean isNationalRegistryValid(String nationalRegistry) {
 
 		String sanitizedNationalRegistry = CharUtils.removeChars(nationalRegistry);
+		System.err.println(CharUtils.isOnlyRepetitiveChars(sanitizedNationalRegistry));
 		if(CharUtils.isOnlyRepetitiveChars(sanitizedNationalRegistry)){
 			return false;
 		}
@@ -34,15 +35,12 @@ public class ValidationUtils {
 	}
 
 	private static Boolean validCnpj(String sanitizedNationalRegistry) {
-
 		String toCalc = sanitizedNationalRegistry.substring(0, 12);
-
 		String firstVerifierDigit = calcCnpjVerifierDigit(toCalc, List.of(5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2));
 		toCalc = toCalc.concat(firstVerifierDigit);
-
 		String secondVerifierDigit = calcCnpjVerifierDigit(toCalc, List.of(6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2));
+		System.err.println(secondVerifierDigit);
 		toCalc = toCalc.concat(secondVerifierDigit);
-
 		return toCalc.equals(sanitizedNationalRegistry);
 	}
 

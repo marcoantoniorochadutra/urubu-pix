@@ -2,11 +2,15 @@ package com.urubu.web.config;
 
 
 
+import com.urubu.model.auth.LoginDto;
 import com.urubu.service.config.ServiceConfig;
+import com.urubu.web.authentication.LoginFactory;
 import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
 import jakarta.annotation.PostConstruct;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.ext.Provider;
+import org.glassfish.hk2.utilities.binding.AbstractBinder;
+import org.glassfish.jersey.process.internal.RequestScoped;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.reflections.Reflections;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -24,8 +28,10 @@ public class AppConfig extends ResourceConfig {
     @PostConstruct
     public void init() {
         jaxrsEndpointConfig();
+        jaxrsBindersConfig();
         swaggerConfig();
     }
+
 
     private void swaggerConfig() {
         OpenApiResource openApiResource = new OpenApiResource();
@@ -33,6 +39,17 @@ public class AppConfig extends ResourceConfig {
         register(openApiResource);
     }
 
+
+    private void jaxrsBindersConfig() {
+        register(new AbstractBinder(){
+            @Override
+            protected void configure() {
+                bindFactory(LoginFactory.class)
+                        .to(LoginDto.class)
+                        .in(RequestScoped.class);
+            }
+        });
+    }
 
     private void jaxrsEndpointConfig() {
         registerControllerResource(

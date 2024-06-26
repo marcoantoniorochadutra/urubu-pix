@@ -1,2 +1,8 @@
-package com.urubu.core.domain.base;public class Selectable {
+package com.urubu.core.domain.base;
+
+public interface Selectable {
+
+    String getKey();
+
+    String getValue();
 }

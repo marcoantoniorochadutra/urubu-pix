@@ -12,6 +12,7 @@ import lombok.Setter;
 @Setter
 @Data
 public class AccountDto {
+
     private String accountIdentifier;
     private Double balance;
 }
