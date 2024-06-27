@@ -26,14 +26,14 @@ public class PasswordUtils {
 		if (StringUtils.isNotBlank(s)) {
 			try {
 				MessageDigest md = MessageDigest.getInstance("MD5");
-
 				BigInteger hash = new BigInteger(1, md.digest(s.getBytes()));
                 return hash.toString(16);
 			} catch (NoSuchAlgorithmException e) {
 				log.error("Cannot encode password to MD5", e);
+                return StringUtils.EMPTY;
 			}
 		}
-		return null;
+		return StringUtils.EMPTY;
 
 	}
 

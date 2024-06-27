@@ -30,7 +30,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 @ComponentScan(basePackages = {
 		"com.urubu.service.impl",
 		"com.urubu.service.converter",
-		"com.urubu.doamin.config",})
+		"com.urubu.domain.config"})
 @EnableAutoConfiguration(exclude = { QuartzAutoConfiguration.class })
 public class ServiceConfig {
 

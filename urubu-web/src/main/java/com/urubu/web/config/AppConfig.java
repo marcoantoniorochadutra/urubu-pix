@@ -2,7 +2,7 @@ package com.urubu.web.config;
 
 
 
-import com.urubu.model.auth.LoginDto;
+import com.urubu.core.auth.LoginDto;
 import com.urubu.service.config.ServiceConfig;
 import com.urubu.web.authentication.LoginFactory;
 import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;

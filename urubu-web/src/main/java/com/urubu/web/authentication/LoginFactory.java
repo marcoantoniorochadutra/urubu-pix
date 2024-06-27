@@ -1,6 +1,6 @@
 package com.urubu.web.authentication;
 
-import com.urubu.model.auth.LoginDto;
+import com.urubu.core.auth.LoginDto;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import org.glassfish.hk2.api.Factory;

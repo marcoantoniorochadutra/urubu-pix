@@ -1,4 +1,7 @@
-package com.urubu.model;
+package com.urubu.core.auth;
+
+import java.util.Locale;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,8 +14,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Data
-public class AccountDto {
+public class LoginDto {
 
-    private String accountIdentifier;
-    private Double balance;
+    private String name;
+    private String email;
+    private Locale locale;
+
 }

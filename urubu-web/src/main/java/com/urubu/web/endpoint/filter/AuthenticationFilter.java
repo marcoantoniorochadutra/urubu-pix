@@ -2,9 +2,8 @@ package com.urubu.web.endpoint.filter;
 
 import java.util.Objects;
 
-import com.urubu.model.auth.LoginDto;
+import com.urubu.core.auth.LoginDto;
 import com.urubu.web.authentication.LoginFactory;
-import org.apache.commons.lang3.BooleanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,4 +1,4 @@
-package com.urubu.model;
+package com.urubu.core.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,8 +11,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Data
-public class AccountDto {
+public class LoginWeb {
 
-    private String accountIdentifier;
-    private Double balance;
+    private String accessToken;
+    private String refreshToken;
+    private LoginDto login;
+
 }

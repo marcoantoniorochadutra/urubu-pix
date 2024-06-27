@@ -1,7 +1,9 @@
 package com.urubu.web.endpoint;
 
 import java.util.Map;
+import java.util.Objects;
 
+import com.urubu.core.auth.LoginOrigin;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -45,6 +47,14 @@ public abstract class AbstractController {
 		}
 	}
 
+	protected LoginOrigin buildOrigin(HttpServletRequest httpServletRequest) {
+		LoginOrigin origin = new LoginOrigin();
+		origin.setIp(extractUserIp(httpServletRequest));
+		origin.setDevice(httpServletRequest.getHeader("User-Agent"));
+		String remoteHost = httpServletRequest.getRemoteHost();
+		origin.setHost(Objects.nonNull(remoteHost) ? remoteHost : "Não Informado");
+		return origin;
+	}
 
 	private static String extractUserIp(HttpServletRequest httpServletRequest) {
 		String ipChain = httpServletRequest.getHeader("X-Forwarded-For");
@@ -56,4 +66,5 @@ public abstract class AbstractController {
 		}
 		return userIp;
 	}
+
 }

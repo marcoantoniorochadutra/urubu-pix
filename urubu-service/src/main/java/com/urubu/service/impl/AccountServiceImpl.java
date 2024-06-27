@@ -1,5 +1,6 @@
 package com.urubu.service.impl;
 
+import com.urubu.core.auth.LoginDto;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public TransactionDto viewBalance(UserDto user) {
+    public TransactionDto viewBalance(LoginDto login) {
         return null;
     }
 
