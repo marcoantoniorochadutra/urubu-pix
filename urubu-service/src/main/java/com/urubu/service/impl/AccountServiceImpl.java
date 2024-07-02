@@ -1,19 +1,19 @@
 package com.urubu.service.impl;
 
 import com.urubu.core.auth.LoginDto;
+import com.urubu.model.base.MessageDto;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.urubu.core.config.ErrorMessage;
-import com.urubu.core.constants.CoreReturnMessages;
+import com.urubu.core.config.ReturnMessage;
+import com.urubu.core.constants.CoreReturnMessage;
 import com.urubu.core.exceptions.AccountException;
 import com.urubu.core.utils.ValidationUtils;
 import com.urubu.domain.entity.Account;
 import com.urubu.domain.entity.User;
 import com.urubu.domain.repository.AccountRepository;
-import com.urubu.model.AccountDto;
 import com.urubu.model.TransactionDto;
 import com.urubu.model.UserDto;
 import com.urubu.model.auth.AccountRegisterDto;
@@ -48,7 +48,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountDto openAccount(AccountRegisterDto register) {
+    public MessageDto openAccount(AccountRegisterDto register) {
 
         validateRegister(register);
         User user = userService.registerUser(register.getName(), register.getEmail(), register.getPassword());
@@ -60,12 +60,12 @@ public class AccountServiceImpl implements AccountService {
 
         Account openAccount = accountRepository.saveAndFlush(newAccount);
 
-        return modelMapper.map(openAccount, AccountDto.class);
+        return new MessageDto(ReturnMessage.getMessage(CoreReturnMessage.ACCOUNT_SUCESS));
     }
 
     private void validateRegister(AccountRegisterDto register) {
 		if (!ValidationUtils.isNationalRegistryValid(register.getNationalRegistry())) {
-            throw new AccountException(ErrorMessage.getMessage(CoreReturnMessages.INVALID_ARGUMENT) + " [nationalRegistry]");
+            throw new AccountException(ReturnMessage.getMessage(CoreReturnMessage.INVALID_ARGUMENT) + " [nationalRegistry]");
 		}
     }
 

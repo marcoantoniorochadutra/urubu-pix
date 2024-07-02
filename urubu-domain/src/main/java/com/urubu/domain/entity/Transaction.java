@@ -52,4 +52,10 @@ public class Transaction {
     @NotNull
     private Double value;
 
+    private String paymentLink;
+    private String pixQrCode;
+    private String bankSlipUrl;
+    private String bankSlipBarCode;
+    private String bankSlipNumericLine;
+
 }

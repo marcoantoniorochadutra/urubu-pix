@@ -4,6 +4,7 @@ import com.urubu.core.exceptions.AccountException;
 import com.urubu.core.exceptions.BusinessException;
 import com.urubu.model.AccountDto;
 import com.urubu.model.auth.AccountRegisterDto;
+import com.urubu.model.base.MessageDto;
 import com.urubu.support.AbstractTestSupport;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,9 @@ public class AccountServiceTest extends AbstractTestSupport {
 		dto.setNationalRegistry("39999807020");
 		dto.setPassword("123456&!#Claudio");
 
-		AccountDto createdAccount = accountService.openAccount(dto);
+		MessageDto createdAccount = accountService.openAccount(dto);
 
-		assertNotNull(createdAccount.getAccountIdentifier());
-		assertEquals(0.0, createdAccount.getBalance());
+		assertEquals("Your account has been successfully created", createdAccount.getMessage());
 	}
 
 	@Test

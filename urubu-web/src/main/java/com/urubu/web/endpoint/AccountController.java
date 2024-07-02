@@ -1,10 +1,13 @@
 package com.urubu.web.endpoint;
 
+import com.urubu.core.auth.Authentication;
 import com.urubu.model.AccountDto;
 import com.urubu.model.TransactionDto;
 import com.urubu.model.auth.AccountRegisterDto;
 import com.urubu.core.auth.LoginDto;
+import com.urubu.model.base.MessageDto;
 import com.urubu.service.AccountService;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Produces;
@@ -26,11 +29,14 @@ public class AccountController {
 
     @POST
     @Path("/open-account")
-    public AccountDto register(AccountRegisterDto register) {
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public MessageDto register(AccountRegisterDto register) {
         return accountService.openAccount(register);
     }
 
     @GET
+    @Authentication
     @Path("/view-balance")
     @Produces({MediaType.APPLICATION_JSON})
     public TransactionDto viewBalance(@Context LoginDto login) {

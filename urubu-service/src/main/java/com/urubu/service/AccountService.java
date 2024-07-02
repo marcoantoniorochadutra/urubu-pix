@@ -5,6 +5,7 @@ import com.urubu.model.TransactionDto;
 import com.urubu.model.UserDto;
 import com.urubu.model.auth.AccountRegisterDto;
 import com.urubu.core.auth.LoginDto;
+import com.urubu.model.base.MessageDto;
 
 public interface AccountService {
 
@@ -12,7 +13,7 @@ public interface AccountService {
 
     TransactionDto updateProfit(UserDto user);
 
-    AccountDto openAccount(AccountRegisterDto register);
+    MessageDto openAccount(AccountRegisterDto register);
 
 
 

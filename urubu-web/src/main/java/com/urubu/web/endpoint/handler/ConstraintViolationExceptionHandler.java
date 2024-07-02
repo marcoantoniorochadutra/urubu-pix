@@ -2,8 +2,8 @@ package com.urubu.web.endpoint.handler;
 
 
 
-import com.urubu.core.config.ErrorMessage;
-import com.urubu.core.constants.CoreReturnMessages;
+import com.urubu.core.config.ReturnMessage;
+import com.urubu.core.constants.CoreReturnMessage;
 import com.urubu.model.base.MessageDto;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -56,19 +56,19 @@ public class ConstraintViolationExceptionHandler implements ExceptionMapper<Cons
 		}
 		
 		if (!nullFields.isEmpty()){
-			sb.append(String.format(" %s  %s.", ErrorMessage.getMessage(CoreReturnMessages.NOT_NULL_MESSAGE), nullFields));
+			sb.append(String.format(" %s  %s.", ReturnMessage.getMessage(CoreReturnMessage.NOT_NULL_MESSAGE), nullFields));
 		}
 		
 		if (!patternFields.isEmpty()){
-			sb.append(String.format(" %s  %s.", ErrorMessage.getMessage(CoreReturnMessages.INVALID_ARGUMENT), nullFields));
+			sb.append(String.format(" %s  %s.", ReturnMessage.getMessage(CoreReturnMessage.INVALID_ARGUMENT), nullFields));
 		}
 		
 		if (!sizeFields.isEmpty()){
-			sb.append(String.format(" %s  %s.", ErrorMessage.getMessage(CoreReturnMessages.INVALID_SIZE), sizeFields));
+			sb.append(String.format(" %s  %s.", ReturnMessage.getMessage(CoreReturnMessage.INVALID_SIZE), sizeFields));
 		}
 		
 		if (!numberFields.isEmpty()){
-			sb.append(String.format(" %s  %s.", ErrorMessage.getMessage(CoreReturnMessages.INVALID_ARGUMENT), numberFields));
+			sb.append(String.format(" %s  %s.", ReturnMessage.getMessage(CoreReturnMessage.INVALID_ARGUMENT), numberFields));
 		}
 		
 		return sb.toString();

@@ -1,17 +1,16 @@
 package com.urubu.service;
 
+import com.urubu.core.auth.LoginDto;
 import com.urubu.model.TransactionDto;
 
 public interface TransactionService {
 
-    TransactionDto deposit(TransactionDto dto);
+	TransactionDto deposit(LoginDto login, TransactionDto dto);
 
-    TransactionDto withdraw(TransactionDto dto);
+	TransactionDto withdraw(LoginDto login, TransactionDto dto);
 
-    TransactionDto invest(TransactionDto dto);
+	TransactionDto invest(LoginDto login, TransactionDto dto);
 
-    TransactionDto transfer(TransactionDto dto, String accountIdentifier);
-
-
+	TransactionDto transfer(LoginDto login, TransactionDto dto, String accountIdentifier);
 
 }

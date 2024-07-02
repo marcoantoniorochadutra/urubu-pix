@@ -83,7 +83,6 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 	}
 
 	private boolean isPlanoAllowedForResource(LoginDto login, Authentication annotation) {
-
 		return true;
 	}
 

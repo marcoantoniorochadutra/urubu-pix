@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum CoreReturnMessages {
+public enum CoreReturnMessage {
 
     WEAK_PASSWORD(0),
     NOT_NULL_MESSAGE(1),
@@ -19,7 +19,10 @@ public enum CoreReturnMessages {
     LOGIN_UNAUTHORIZED_ERROR(8),
     LOGIN_CREDENTIALS_ERROR(9),
     LOGIN_BLOCKED_ACCOUNT(10),
-    LOGIN_EXISTING_EMAIL(11);
+    LOGIN_EXISTING_EMAIL(11),
+    DUPLICATED_ERROR(12),
+    NO_RECORD_FOUND(13),
+    ACCOUNT_SUCESS(14);
 
     private final Integer code;
 }

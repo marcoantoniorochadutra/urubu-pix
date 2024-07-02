@@ -4,8 +4,8 @@ import com.urubu.core.auth.JwtUtils;
 import com.urubu.core.auth.LoginDto;
 import com.urubu.core.auth.LoginOrigin;
 import com.urubu.core.auth.LoginWeb;
-import com.urubu.core.config.ErrorMessage;
-import com.urubu.core.constants.CoreReturnMessages;
+import com.urubu.core.config.ReturnMessage;
+import com.urubu.core.constants.CoreReturnMessage;
 import com.urubu.core.exceptions.LoginException;
 import com.urubu.core.exceptions.ref.LoginError;
 import com.urubu.core.utils.PasswordUtils;
@@ -49,7 +49,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.getUserDetails().setRefreshToken(refreshToken);
         userRepository.saveAndFlush(user);
 
-        log.info("Usuario Logado | {} | {} | {} | {} ", user.getId(), user.getEmail(), login.getRefreshToken(), origin.getHost());
+        log.info("User Logged In | {} | {} | {} | {} ", user.getId(), user.getEmail(), login.getRefreshToken(), origin.getHost());
         return login;
     }
 
@@ -57,7 +57,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         LoginDto loginDto = new LoginDto();
         loginDto.setName(user.getName());
         loginDto.setEmail(user.getEmail());
-        loginDto.setLocale(user.getUserDetails().getLocale());
+        loginDto.setLocale(user.getUserDetails().getLocale().toString());
         return loginDto;
     }
 
@@ -71,11 +71,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private void validateUsuario(User user) {
         if (Objects.isNull(user)) {
-            throw new LoginException(ErrorMessage.getMessage(CoreReturnMessages.LOGIN_CREDENTIALS_ERROR), LoginError.CREDENTIALS);
+            throw new LoginException(ReturnMessage.getMessage(CoreReturnMessage.LOGIN_CREDENTIALS_ERROR), LoginError.CREDENTIALS);
         }
 
         if (BooleanUtils.isFalse(user.getUserDetails().getActive())) {
-            throw new LoginException(ErrorMessage.getMessage(CoreReturnMessages.LOGIN_BLOCKED_ACCOUNT), LoginError.BLOCKED);
+            throw new LoginException(ReturnMessage.getMessage(CoreReturnMessage.LOGIN_BLOCKED_ACCOUNT), LoginError.BLOCKED);
         }
 
     }
@@ -83,7 +83,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private void validateSenha(String senhaSalva, String senhaAcesso) {
         String md5Encode = PasswordUtils.encodeMd5(senhaAcesso);
         if(!senhaSalva.matches(md5Encode)) {
-            throw new LoginException(ErrorMessage.getMessage(CoreReturnMessages.LOGIN_CREDENTIALS_ERROR), LoginError.CREDENTIALS);
+            throw new LoginException(ReturnMessage.getMessage(CoreReturnMessage.LOGIN_CREDENTIALS_ERROR), LoginError.CREDENTIALS);
         }
     }
 }

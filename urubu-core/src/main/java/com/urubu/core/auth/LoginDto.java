@@ -18,6 +18,6 @@ public class LoginDto {
 
     private String name;
     private String email;
-    private Locale locale;
+    private String locale;
 
 }

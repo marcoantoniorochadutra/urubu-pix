@@ -1,23 +1,23 @@
 package com.urubu.core.config;
 
-import com.urubu.core.constants.CoreReturnMessages;
+import com.urubu.core.constants.CoreReturnMessage;
 
 import java.util.ResourceBundle;
 
-public class ErrorMessage {
+public class ReturnMessage {
 
     private static final String BUNDLE_PATH = "return_messages/messages";
 
-    public static String getMessage(CoreReturnMessages msg) {
+    public static String getMessage(CoreReturnMessage msg) {
         return findMessage(msg);
     }
 
-    public static String getMessageWithField(CoreReturnMessages msg) {
+    public static String getMessageWithField(CoreReturnMessage msg) {
         String message = findMessage(msg);
         return message + " %s";
     }
 
-    private static String findMessage(CoreReturnMessages msg) {
+    private static String findMessage(CoreReturnMessage msg) {
         String message;
         try {
             ResourceBundle rs = ResourceBundle.getBundle(BUNDLE_PATH, LocaleContext.getCurrentLocale());

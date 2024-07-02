@@ -21,7 +21,7 @@ public class TransactionDto {
     private Long id;
     private String transactionIdentifier;
     private String accountIdentifier;
-
+    private UserDto user;
     private Double amount;
 
     private CreditCardDto creditCard;
@@ -34,5 +34,6 @@ public class TransactionDto {
     private String bankSlipUrl;
     private String bankSlipBarCode;
     private String bankSlipNumericLine;
+
 
 }

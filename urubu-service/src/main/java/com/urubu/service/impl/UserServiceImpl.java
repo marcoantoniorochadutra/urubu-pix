@@ -7,8 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.urubu.core.config.ErrorMessage;
-import com.urubu.core.constants.CoreReturnMessages;
+import com.urubu.core.config.ReturnMessage;
+import com.urubu.core.constants.CoreReturnMessage;
 import com.urubu.core.exceptions.BusinessException;
 import com.urubu.core.utils.PasswordUtils;
 import com.urubu.core.utils.ValidationUtils;
@@ -50,12 +50,12 @@ public class UserServiceImpl implements UserService {
 		}
 
 		if(!ValidationUtils.isValidEmail(email)) {
-			String errorMsg = ErrorMessage.getMessageWithField(CoreReturnMessages.INVALID_ARGUMENT);
+			String errorMsg = ReturnMessage.getMessageWithField(CoreReturnMessage.INVALID_ARGUMENT);
 			throw new BusinessException(String.format(errorMsg, "[email]"));
 		}
 
 		if(StringUtils.isBlank(nome)) {
-			String errorMsg = ErrorMessage.getMessageWithField(CoreReturnMessages.NOT_NULL_MESSAGE);
+			String errorMsg = ReturnMessage.getMessageWithField(CoreReturnMessage.NOT_NULL_MESSAGE);
 			throw new BusinessException(String.format(errorMsg, "[name]"));
 		}
 	}

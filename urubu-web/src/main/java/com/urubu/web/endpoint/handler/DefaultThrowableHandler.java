@@ -1,7 +1,7 @@
 package com.urubu.web.endpoint.handler;
 
-import com.urubu.core.config.ErrorMessage;
-import com.urubu.core.constants.CoreReturnMessages;
+import com.urubu.core.config.ReturnMessage;
+import com.urubu.core.constants.CoreReturnMessage;
 import com.urubu.model.base.MessageDto;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -24,7 +24,7 @@ public class DefaultThrowableHandler implements ExceptionMapper<Throwable> {
                         .map(Object::toString)
                         .collect(Collectors.joining(System.lineSeparator())) );
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                .entity(new MessageDto(ErrorMessage.getMessage(CoreReturnMessages.INTERNAL_ERROR)))
+                .entity(new MessageDto(ReturnMessage.getMessage(CoreReturnMessage.INTERNAL_ERROR)))
                 .type(MediaType.APPLICATION_JSON)
                 .build();
     }
