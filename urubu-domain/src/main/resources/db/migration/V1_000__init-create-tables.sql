@@ -8,11 +8,17 @@
     ) engine=InnoDB;
 
     create table transactions (
-        tipo_transacao tinyint unsigned not null check (tipo_transacao between 0 and 2),
-        value float(53) not null,
+        amount float(53) not null,
+        payment_method tinyint unsigned not null check (payment_method between 0 and 2),
+        payment_status tinyint unsigned not null check (payment_status between 0 and 4),
+        trasaction_type tinyint unsigned not null check (trasaction_type between 0 and 2),
         account_id bigint not null,
         id bigint not null auto_increment,
         user_id bigint not null,
+        bank_slip_bar_code varchar(255),
+        bank_slip_numeric_line varchar(255),
+        payment_link varchar(255),
+        pix_qr_code varchar(1000),
         transaction_identifier varchar(255) not null,
         primary key (id)
     ) engine=InnoDB;
@@ -20,7 +26,7 @@
     create table user_details (
         active bit not null,
         id integer unsigned not null auto_increment,
-        locale varchar(255) not null,
+        locale varchar(20) not null,
         refresh_token varchar(255),
         primary key (id)
     ) engine=InnoDB;

@@ -1,5 +1,7 @@
 package com.urubu.domain.entity;
 
+import com.urubu.domain.ref.PaymentMethod;
+import com.urubu.domain.ref.PaymentStatus;
 import com.urubu.domain.ref.TransactionType;
 
 import jakarta.persistence.Column;
@@ -47,14 +49,25 @@ public class Transaction {
     @NotNull
     @Enumerated(EnumType.ORDINAL)
     @Column(columnDefinition = "tinyint unsigned")
-    private TransactionType tipoTransacao;
+    private TransactionType trasactionType;
 
     @NotNull
-    private Double value;
+    @Enumerated(EnumType.ORDINAL)
+    @Column(columnDefinition = "tinyint unsigned")
+    private PaymentMethod paymentMethod;
+
+    @NotNull
+    @Enumerated(EnumType.ORDINAL)
+    @Column(columnDefinition = "tinyint unsigned")
+    private PaymentStatus paymentStatus;
+
+    @NotNull
+    private Double amount;
+
 
     private String paymentLink;
+    @Column(length = 10000)
     private String pixQrCode;
-    private String bankSlipUrl;
     private String bankSlipBarCode;
     private String bankSlipNumericLine;
 

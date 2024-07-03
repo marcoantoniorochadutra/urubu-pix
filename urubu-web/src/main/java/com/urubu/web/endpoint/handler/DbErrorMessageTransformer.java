@@ -86,7 +86,7 @@ public class DbErrorMessageTransformer {
 		String keyName = sqlMsg.substring(startIndex, sqlMsg.length() -1);
 		int endIndex = keyName.indexOf("'");
 		String fieldValue = keyName.substring(0, endIndex);
-		return String.format("%s [ %s ].", ReturnMessage.getMessageWithField(CoreReturnMessage.DUPLICATED_ERROR), fieldValue);
+		return ReturnMessage.getMessageWithField(CoreReturnMessage.DUPLICATED_ERROR, fieldValue);
 	}
 	
 	private static String getForeignKeyMessage(String sqlMsg) {

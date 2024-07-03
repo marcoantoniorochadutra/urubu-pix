@@ -1,6 +1,7 @@
 package com.urubu.service.impl;
 
 import com.urubu.core.auth.LoginDto;
+import com.urubu.model.AccountDto;
 import com.urubu.model.base.MessageDto;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.modelmapper.ModelMapper;
@@ -20,6 +21,8 @@ import com.urubu.model.auth.AccountRegisterDto;
 import com.urubu.service.AccountService;
 import com.urubu.service.UserService;
 
+import java.util.Objects;
+
 @Service
 public class AccountServiceImpl implements AccountService {
 
@@ -38,14 +41,22 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public TransactionDto viewBalance(LoginDto login) {
-        return null;
+    public AccountDto viewBalance(LoginDto login) {
+        Account account = accountRepository.findByAccountIdentifier(login.getAccountIdentifier());
+        validateAccount(login, account);
+        return modelMapper.map(account, AccountDto.class);
     }
 
-    @Override
-    public TransactionDto updateProfit(UserDto user) {
-        return null;
+    private void validateAccount(LoginDto login, Account account) {
+        if (Objects.isNull(account)) {
+            throw new AccountException(ReturnMessage.getMessageWithField(CoreReturnMessage.NO_RECORD_FOUND, "[account]"));
+        }
+        if(!account.getUser().getEmail().equalsIgnoreCase(login.getEmail())) {
+            throw new AccountException(ReturnMessage.getMessage(CoreReturnMessage.LOGIN_UNAUTHORIZED_ERROR));
+        }
+
     }
+
 
     @Override
     public MessageDto openAccount(AccountRegisterDto register) {
@@ -58,7 +69,7 @@ public class AccountServiceImpl implements AccountService {
         newAccount.setBalance(0.0);
         newAccount.setUser(user);
 
-        Account openAccount = accountRepository.saveAndFlush(newAccount);
+        accountRepository.saveAndFlush(newAccount);
 
         return new MessageDto(ReturnMessage.getMessage(CoreReturnMessage.ACCOUNT_SUCESS));
     }

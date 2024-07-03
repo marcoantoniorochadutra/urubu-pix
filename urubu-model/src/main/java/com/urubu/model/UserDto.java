@@ -17,4 +17,10 @@ public class UserDto {
     private String nome;
     private String email;
     private Boolean active;
+
+    public UserDto(String nome, String email) {
+        this.nome = nome;
+        this.email = email;
+        this.active = true;
+    }
 }

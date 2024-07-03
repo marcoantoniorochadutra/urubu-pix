@@ -9,9 +9,7 @@ import com.urubu.model.base.MessageDto;
 
 public interface AccountService {
 
-    TransactionDto viewBalance(LoginDto login);
-
-    TransactionDto updateProfit(UserDto user);
+    AccountDto viewBalance(LoginDto login);
 
     MessageDto openAccount(AccountRegisterDto register);
 

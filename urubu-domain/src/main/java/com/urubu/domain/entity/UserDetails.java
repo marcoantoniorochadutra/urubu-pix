@@ -34,6 +34,7 @@ public class UserDetails {
     private Boolean active;
 
     @NotNull
+    @Column(length = 20)
     private Locale locale;
 
     private String refreshToken;

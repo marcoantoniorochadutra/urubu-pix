@@ -59,4 +59,11 @@ public class AccountServiceTest extends AbstractTestSupport {
 
 		assertEquals("The password must contain letters and numbers, between 6 and 20 characters, and may include special characters.", ex.getMessage());
 	}
+
+	@Test
+	public void shouldViewBalance() {
+		AccountDto balance = accountService.viewBalance(loginDefault());
+		assertNotNull(balance);
+		assertEquals(0.0, balance.getBalance());
+	}
 }

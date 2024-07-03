@@ -33,12 +33,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User registerUser(String nome, String email, String password) {
-		
 		validateRegister(nome, email, password);
+
 		User user = new User();
 		user.setName(nome);
 		user.setEmail(email);
 		user.setHashPass(PasswordUtils.encodeMd5(password));
+
 		UserDetails details = new UserDetails(true, new Locale("en"));
 		user.setUserDetails(details);
 		return userRepository.saveAndFlush(user);
@@ -50,13 +51,11 @@ public class UserServiceImpl implements UserService {
 		}
 
 		if(!ValidationUtils.isValidEmail(email)) {
-			String errorMsg = ReturnMessage.getMessageWithField(CoreReturnMessage.INVALID_ARGUMENT);
-			throw new BusinessException(String.format(errorMsg, "[email]"));
+			throw new BusinessException(ReturnMessage.getMessageWithField(CoreReturnMessage.INVALID_ARGUMENT, "[email]"));
 		}
 
 		if(StringUtils.isBlank(nome)) {
-			String errorMsg = ReturnMessage.getMessageWithField(CoreReturnMessage.NOT_NULL_MESSAGE);
-			throw new BusinessException(String.format(errorMsg, "[name]"));
+			throw new BusinessException(ReturnMessage.getMessageWithField(CoreReturnMessage.NOT_NULL_MESSAGE, "[name]"));
 		}
 	}
 

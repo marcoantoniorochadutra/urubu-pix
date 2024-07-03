@@ -3,6 +3,7 @@ package com.urubu.model;
 import static com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.urubu.model.base.SelectableDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -20,20 +21,21 @@ public class TransactionDto {
 
     private Long id;
     private String transactionIdentifier;
-    private String accountIdentifier;
+
     private UserDto user;
+    private SelectableDto account;
+
+    private SelectableDto transactionType;
+    private SelectableDto paymentMethod;
+    private SelectableDto paymentStatus;
     private Double amount;
 
-    private CreditCardDto creditCard;
-    private CreditCardHolderInfo creditCardHolderInfo;
-
     private String paymentLink;
-
     private String pixQrCode;
-
-    private String bankSlipUrl;
     private String bankSlipBarCode;
     private String bankSlipNumericLine;
 
+    private CreditCardDto creditCard;
+    private CreditCardHolderInfo creditCardHolderInfo;
 
 }

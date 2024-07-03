@@ -20,6 +20,7 @@
     <properties>
         <spring-boot.version>3.2.1</spring-boot.version>
         <maven.compiler.source>18</maven.compiler.source>
+        <google.zxing.qrcode>3.4.1</google.zxing.qrcode>
         <maven.compiler.target>18</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <swagger-jaxrs2.version>2.2.20</swagger-jaxrs2.version>

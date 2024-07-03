@@ -20,4 +20,6 @@ public class LoginDto {
     private String email;
     private String locale;
 
+    private String accountIdentifier;
+
 }

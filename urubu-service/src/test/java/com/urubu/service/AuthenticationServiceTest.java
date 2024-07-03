@@ -25,9 +25,9 @@ public class AuthenticationServiceTest extends AbstractTestSupport {
 
     @Test
     public void shouldLogin() {
-        User u = createUser("Marco Dutra", "email@hotmail.com", "123456&!#Claudio");
+        User u = userDefault();
 
-        LoginWeb login = authenticationService.login(new AccountAcessDto(u.getEmail(), "123456&!#Claudio"), generateOrigin());
+        LoginWeb login = authenticationService.login(new AccountAcessDto(u.getEmail(), "Dificuldade$124%"), generateOrigin());
 
         assertNotNull(login.getAccessToken());
         assertNotNull(login.getRefreshToken());
@@ -35,7 +35,7 @@ public class AuthenticationServiceTest extends AbstractTestSupport {
         LoginDto dto = login.getLogin();
         assertEquals(u.getName(), dto.getName());
         assertEquals(u.getEmail(), dto.getEmail());
-        assertEquals(SystemConstants.EN_LOCALE, dto.getLocale());
+        assertEquals(SystemConstants.EN_LOCALE.toString(), dto.getLocale());
     }
 
     @Test

@@ -39,7 +39,7 @@ public class AccountController {
     @Authentication
     @Path("/view-balance")
     @Produces({MediaType.APPLICATION_JSON})
-    public TransactionDto viewBalance(@Context LoginDto login) {
+    public AccountDto viewBalance(@Context LoginDto login) {
         return accountService.viewBalance(login);
     }
 

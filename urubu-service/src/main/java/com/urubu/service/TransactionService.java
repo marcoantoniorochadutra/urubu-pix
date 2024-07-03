@@ -9,8 +9,8 @@ public interface TransactionService {
 
 	TransactionDto withdraw(LoginDto login, TransactionDto dto);
 
-	TransactionDto invest(LoginDto login, TransactionDto dto);
-
 	TransactionDto transfer(LoginDto login, TransactionDto dto, String accountIdentifier);
+
+	void manageTransaction(String transactionIdentifier);
 
 }

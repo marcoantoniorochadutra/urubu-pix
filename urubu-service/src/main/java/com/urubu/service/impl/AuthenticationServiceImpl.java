@@ -9,7 +9,9 @@ import com.urubu.core.constants.CoreReturnMessage;
 import com.urubu.core.exceptions.LoginException;
 import com.urubu.core.exceptions.ref.LoginError;
 import com.urubu.core.utils.PasswordUtils;
+import com.urubu.domain.entity.Account;
 import com.urubu.domain.entity.User;
+import com.urubu.domain.repository.AccountRepository;
 import com.urubu.domain.repository.UserRepository;
 import com.urubu.model.auth.AccountAcessDto;
 import com.urubu.service.AuthenticationService;
@@ -27,18 +29,22 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private static final Logger log = LoggerFactory.getLogger(AuthenticationServiceImpl.class);
 
     private final UserRepository userRepository;
+    private final AccountRepository accountRepository;
 
     @Autowired
-    public AuthenticationServiceImpl(UserRepository userRepository) {
+    public AuthenticationServiceImpl(UserRepository userRepository,
+                                     AccountRepository accountRepository) {
         this.userRepository = userRepository;
+        this.accountRepository = accountRepository;
     }
 
     @Override
     public LoginWeb login(AccountAcessDto acessDto, LoginOrigin origin) {
         User user = getValidUserFromAcess(acessDto);
+        Account account = accountRepository.findByUserId(user.getId());
 
         LoginWeb login = new LoginWeb();
-        LoginDto loginDto = buildLoginDto(user);
+        LoginDto loginDto = buildLoginDto(user, account);
         login.setLogin(loginDto);
 
         String accessToken = JwtUtils.generate(loginDto, "WEB-ABB#" + origin.getDevice(), origin.getIp());
@@ -53,11 +59,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         return login;
     }
 
-    private LoginDto buildLoginDto(User user) {
+    private LoginDto buildLoginDto(User user, Account account) {
         LoginDto loginDto = new LoginDto();
         loginDto.setName(user.getName());
         loginDto.setEmail(user.getEmail());
         loginDto.setLocale(user.getUserDetails().getLocale().toString());
+        loginDto.setAccountIdentifier(account.getAccountIdentifier());
         return loginDto;
     }
 

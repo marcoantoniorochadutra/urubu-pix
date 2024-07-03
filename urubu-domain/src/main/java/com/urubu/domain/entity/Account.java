@@ -1,5 +1,6 @@
 package com.urubu.domain.entity;
 
+import com.urubu.core.domain.base.Selectable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +16,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,7 +28,7 @@ import lombok.Setter;
         @UniqueConstraint(columnNames = "user_id", name = "uk_user_account"),
 })
 @Entity(name = "accounts")
-public class Account {
+public class Account implements Selectable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +43,16 @@ public class Account {
     @NotNull
     @OneToOne
     @JoinColumn(name="user_id", foreignKey = @ForeignKey(name = "fk_user_account"))
+    @ToString.Exclude
     private User user;
 
+    @Override
+    public String getKey() {
+        return id.toString();
+    }
+
+    @Override
+    public String getValue() {
+        return null;
+    }
 }

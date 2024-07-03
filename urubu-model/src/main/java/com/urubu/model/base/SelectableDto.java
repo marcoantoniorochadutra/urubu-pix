@@ -15,4 +15,8 @@ public class SelectableDto {
 
     private String key;
     private String value;
+
+    public SelectableDto(String key) {
+        this.key = key;
+    }
 }
